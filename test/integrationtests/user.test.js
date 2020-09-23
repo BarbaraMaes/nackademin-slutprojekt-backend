@@ -19,17 +19,6 @@ describe('Integration for User', function () {
 
 	beforeEach(async function () {
 		await userModel.clear();
-	});
-
-	after(async () => {
-		try {
-			await Database.disconnect();
-		} catch (error) {
-			console.log(error);
-		}
-	});
-
-	it('POST /api/register should create a user', async () => {
 		const person = {
 			email: 'pepito@mail.com',
 			password: '12345',
@@ -41,11 +30,23 @@ describe('Integration for User', function () {
 				city: 'SuperCity',
 			},
 		};
-		const userToRegister = await userModel.signup(person);
+		await userModel.signup(person);
+		this.currentTest.user = person;
+	});
+
+	after(async () => {
+		try {
+			await Database.disconnect();
+		} catch (error) {
+			console.log(error);
+		}
+	});
+
+	it('POST /api/register should create a user', async function () {
 		const resp = await request(app)
 			.post('/api/register')
 			.set('Content-Type', 'application/json')
-			.send(person);
+			.send(this.test.user);
 		expect(resp).to.be.json;
 		expect(resp).to.have.status(201);
 		expect(resp.body.user).to.include.keys([
