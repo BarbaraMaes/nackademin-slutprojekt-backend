@@ -33,6 +33,12 @@ exports.signup = async (person) => {
 		orderHistory: [],
 	};
 
+	const doc = await User.findOne({email: person.email});
+
+	if(doc) {
+		 throw new Error('User already exists')
+	}
+
 	const userToSave = new User(user);
 	const response = await userToSave.save();
 	return response;
