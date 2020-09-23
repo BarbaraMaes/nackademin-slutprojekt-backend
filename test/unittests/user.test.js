@@ -16,6 +16,7 @@ describe('User model', async function () {
 
 	beforeEach(async () => {
 		// Clear Database if other tests
+		await userModel.clear();
 	});
 
 	after(async () => {
@@ -39,7 +40,7 @@ describe('User model', async function () {
 			},
 		};
 
-        const user = await userModel.signup(person);
+		const user = await userModel.signup(person);
 
 		expect(user).to.be.a('object');
 		expect(user._doc).to.include.all.keys([

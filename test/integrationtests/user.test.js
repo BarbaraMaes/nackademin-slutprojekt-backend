@@ -18,7 +18,7 @@ describe('Integration for User', function () {
 	});
 
 	beforeEach(async function () {
-		// await userModel.clear();
+		await userModel.clear();
 	});
 
 	after(async () => {
