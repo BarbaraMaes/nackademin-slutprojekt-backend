@@ -14,19 +14,9 @@ describe('User model', async function () {
 		}
 	});
 
-	beforeEach(async () => {
+	beforeEach(async function () {
 		// Clear Database if other tests
-	});
-
-	after(async () => {
-		try {
-			await Database.disconnect();
-		} catch (error) {
-			console.log(error);
-		}
-	});
-
-	it('Should create a user', async function () {
+		await userModel.clear();
 		const person = {
 			email: 'pepito@mail.com',
 			password: '12345',
@@ -39,10 +29,21 @@ describe('User model', async function () {
 			},
 		};
 
-        const user = await userModel.signup(person);
+		const user = await userModel.signup(person);
+		this.currentTest.user = user;
+	});
 
-		expect(user).to.be.a('object');
-		expect(user._doc).to.include.all.keys([
+	after(async () => {
+		try {
+			await Database.disconnect();
+		} catch (error) {
+			console.log(error);
+		}
+	});
+
+	it('Should create a user', async function () {
+		expect(this.test.user).to.be.a('object');
+		expect(this.test.user._doc).to.include.all.keys([
 			'_id',
 			'email',
 			'password',
@@ -51,18 +52,18 @@ describe('User model', async function () {
 			'adress',
 			'orderHistory',
 		]);
-		expect(user.adress).to.have.all.keys(['street', 'zip', 'city']);
-		expect(user._doc).to.deep.include({
+		expect(this.test.user.adress).to.have.all.keys(['street', 'zip', 'city']);
+		expect(this.test.user._doc).to.deep.include({
 			email: 'pepito@mail.com',
 			name: 'Pepito Perez',
 			role: 'customer',
 		});
-		expect(user._doc.adress).to.deep.include({
+		expect(this.test.user._doc.adress).to.deep.include({
 			street: 'Corazongatan 3',
 			zip: '123 56',
 			city: 'SuperCity',
 		});
-		expect(user.password).to.not.equal('12345');
+		expect(this.test.user.password).to.not.equal('12345');
 	});
 
 	it('Should login a user and sign a JWT token', async function () {

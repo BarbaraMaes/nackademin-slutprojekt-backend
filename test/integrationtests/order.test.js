@@ -4,7 +4,7 @@ const chaiHttp = require('chai-http');
 chai.use(chaiHttp);
 const Database = require('../../database/database');
 const userModel = require('../../models/userModel');
-const orderModel = require("../../models/orderModel");
+const orderModel = require('../../models/orderModel');
 const app = require('../../app');
 
 const { expect, request } = require('chai');
@@ -57,7 +57,6 @@ describe('Integration for Order', function () {
 			.set('Authorization', 'Bearer ' + login.token)
 			.send(body)
 			.then((res) => {
-				console.log(res.body)
 				expect(res.body).to.be.an('object');
 				expect(res.body).to.have.status('inProcess');
 				expect(res.body._id).to.be.a('string');
@@ -65,7 +64,6 @@ describe('Integration for Order', function () {
 	});
 
 	it('POST /api/orders should create a order with anonymous user', async function () {
-
 		const body = {
 			items: [3, 5, 1],
 			orderValue: 399,
@@ -82,7 +80,7 @@ describe('Integration for Order', function () {
 			});
 	});
 
-	it("GET /api/orders/ should return all orders for a user", async function () {
+	it('GET /api/orders/ should return all orders for a user', async function () {
 		const person = {
 			email: 'pepito@mail.com',
 			password: '12345',
@@ -100,13 +98,13 @@ describe('Integration for Order', function () {
 
 		const order = {
 			items: [45, 77],
-			orderValue: 649
-		}
+			orderValue: 649,
+		};
 
 		const order2 = {
 			items: [564, 222],
-			orderValue: 1000
-		}
+			orderValue: 1000,
+		};
 
 		const newOrder = await orderModel.createOrder(order);
 		const newOrder2 = await orderModel.createOrder(order2);
@@ -118,10 +116,10 @@ describe('Integration for Order', function () {
 			.set('Authorization', 'Bearer ' + login.token)
 			.then((res) => {
 				expect(res.body).to.be.an('array');
-				expect(res).to.have.status(200)
+				expect(res).to.have.status(200);
 			});
-	})
-	it("GET /api/orders/ should return all orders for a user", async function () {
+	});
+	it('GET /api/orders/ should return all orders for a user', async function () {
 		const person = {
 			email: 'pepito@mail.com',
 			password: '12345',
@@ -151,13 +149,13 @@ describe('Integration for Order', function () {
 
 		const order = {
 			items: [45, 77],
-			orderValue: 649
-		}
+			orderValue: 649,
+		};
 
 		const order2 = {
 			items: [564, 222],
-			orderValue: 1000
-		}
+			orderValue: 1000,
+		};
 
 		const newOrder = await orderModel.createOrder(order);
 		const newOrder2 = await orderModel.createOrder(order2);
@@ -169,7 +167,7 @@ describe('Integration for Order', function () {
 			.set('Authorization', 'Bearer ' + login.token)
 			.then((res) => {
 				expect(res.body).to.be.an('array');
-				expect(res).to.have.status(200)
+				expect(res).to.have.status(200);
 			});
-	})
+	});
 });

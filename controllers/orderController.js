@@ -1,11 +1,10 @@
 //import Model
 const orderModel = require('../models/orderModel');
 const userModel = require('../models/userModel');
-const auth = require('../middleware/auth');
 
+//Kollar om en användare har loggat in, om så är fallet skapas en order
+//som läggs till i orderHistory i användarens objekt
 exports.createOrder = async (req, res) => {
-	//Kollar om en användare har loggat in, om så är fallet skapas en order
-	//som läggs till i orderHistory i användarens objekt
 	if (req.user) {
 		try {
 			const order = await orderModel.createOrder(req.body);
@@ -25,6 +24,7 @@ exports.createOrder = async (req, res) => {
 	}
 };
 
+//Hanterar request från klienten, hämtar ordrar för admin och inloggade användare.
 exports.getOrders = async (req, res) => {
 	try {
 		if (req.user.role === 'admin') {
