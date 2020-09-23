@@ -34,7 +34,9 @@ async function connect() {
 		useCreateIndex: true,
 	});
 
-	await productModel.init();
+	if(process.env.ENVIRONMENT !== 'test') {
+		await productModel.init();
+	}
 }
 
 async function disconnect() {

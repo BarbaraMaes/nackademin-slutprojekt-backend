@@ -16,7 +16,6 @@ const Product = mongoose.model('Product', productSchema);
 exports.init = async () => {
 	const productsOnDB = await Product.find({});
 	if (productsOnDB.length === 0) {
-		console.log('Created all products on DB')
 		products.forEach(async (product) => {
 			await Product.create(product);
 		});
