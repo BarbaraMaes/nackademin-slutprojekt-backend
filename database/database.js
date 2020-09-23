@@ -34,7 +34,7 @@ async function connect() {
 		useCreateIndex: true,
 	});
 
-	//await productModel.init();
+	await productModel.init();
 }
 
 async function disconnect() {

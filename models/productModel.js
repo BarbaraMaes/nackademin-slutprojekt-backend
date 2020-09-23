@@ -14,9 +14,13 @@ const Product = mongoose.model('Product', productSchema);
 
 //laddar in alle produkter från product.json i databasen. kommenteras ut i database.js vid användning av ny databas
 exports.init = async () => {
-	products.forEach(async (product) => {
-		await Product.create(product);
-	});
+	const productsOnDB = await Product.find({});
+	if (productsOnDB.length === 0) {
+		console.log('Created all products on DB')
+		products.forEach(async (product) => {
+			await Product.create(product);
+		});
+	}
 };
 
 //tar emot ett product object och sparar den i databasen.
