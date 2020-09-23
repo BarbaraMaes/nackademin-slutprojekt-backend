@@ -12,9 +12,6 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/release'
 
   # This workflow contains a single job called "build"
   build:
@@ -31,3 +28,4 @@ jobs:
           heroku_app_name: "peaceful-springs-31968"
           heroku_email: "ellaschwarzt@gmail.com"
           usedocker: true
+
