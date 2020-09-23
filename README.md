@@ -1,3 +1,14 @@
+# Information till David
+Länk till Heroku: https://peaceful-springs-31968.herokuapp.com/#/
+
+## Om du kör programmet lokalt behöver du göra följande:
+ - cd /database/database.js
+ - Avkommentera rad 37 för att lägga till produkter till databasen
+ - cd root
+ - npm start.js
+ - Gå tillbaka och kommentera bort rad 37 igen så att inte fler produkter läggs till varje gång du startar projektet.
+ __________________________________________________________________________________________________________________________
+
 # Slutprojekt - Programmering BackEnd 2
 
 ## Arbetssätt
