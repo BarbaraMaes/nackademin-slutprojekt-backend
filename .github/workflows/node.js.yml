@@ -43,4 +43,3 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "peaceful-springs-31968"
           heroku_email: "ellaschwarzt@gmail.com"
-          usedocker: true
