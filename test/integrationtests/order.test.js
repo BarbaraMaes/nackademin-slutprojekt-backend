@@ -57,7 +57,6 @@ describe('Integration for Order', function () {
 			.set('Authorization', 'Bearer ' + login.token)
 			.send(body)
 			.then((res) => {
-				console.log(res.body);
 				expect(res.body).to.be.an('object');
 				expect(res.body).to.have.status('inProcess');
 				expect(res.body._id).to.be.a('string');
