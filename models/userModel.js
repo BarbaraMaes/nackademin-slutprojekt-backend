@@ -33,10 +33,10 @@ exports.signup = async (person) => {
 		orderHistory: [],
 	};
 
-	const doc = await User.findOne({email: person.email});
+	const doc = await User.findOne({ email: person.email });
 
-	if(doc) {
-		 throw new Error('User already exists')
+	if (doc) {
+		throw new Error('User already exists');
 	}
 
 	const userToSave = new User(user);
@@ -93,7 +93,6 @@ exports.updateOrderHistory = async (id, order) => {
 
 // Returnerar order history
 exports.getOrderHistory = async (id) => {
-	console.log(id);
 	const user = await User.findById(id);
 	return user.orderHistory;
 };

@@ -43,6 +43,7 @@ describe('Integration for User', function () {
 	});
 
 	it('POST /api/register should create a user', async function () {
+		await userModel.clear();
 		const resp = await request(app)
 			.post('/api/register')
 			.set('Content-Type', 'application/json')

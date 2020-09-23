@@ -12,7 +12,7 @@ exports.createProduct = async (req, res) => {
 			imgFile: req.body.imgFile,
 		};
 		const product = await productModel.createProduct(prod);
-		res.status(201).send(product);
+		res.status(201).send({ product });
 	} catch (error) {
 		res.status(400).send({ message: error.message });
 	}

@@ -30,7 +30,6 @@ exports.clear = async () => {
 exports.getOrders = async (orderIds) => {
 	let orders = [];
 	for await (id of orderIds) {
-		console.log(id);
 		let order = await Order.findById(id);
 		orders.push(order);
 	}
